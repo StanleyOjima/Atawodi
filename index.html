@@ -566,7 +566,7 @@ li.open .sy-more{grid-template-rows:1fr}
 
 /* ============ HUD ============ */
 .hud{position:fixed;left:0;right:0;top:0;z-index:30;height:56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
-  padding:0 clamp(20px,3vw,40px);background:linear-gradient(180deg,rgba(8,8,8,.94) 0%,rgba(8,8,8,.82) 70%,rgba(8,8,8,0) 100%);
+  padding:0 clamp(20px,3vw,40px);background:rgba(8,8,8,.9);-webkit-backdrop-filter:blur(14px) saturate(110%);backdrop-filter:blur(14px) saturate(110%);
   opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
 .hud.on{opacity:1;transform:none;pointer-events:auto}
 .hud-l{display:flex;align-items:center;gap:18px;min-width:0}
@@ -1034,6 +1034,7 @@ html:not(.nohfx) .hero .bg{opacity:0!important}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation}
 @media(max-width:860px){html{overflow-x:hidden}}
 html.mlock{overflow:hidden}
+@media(max-width:860px){.content{padding-top:70px}.content h1{margin-top:34px}.mol{margin-top:26px}}
 </style>
 <script>document.documentElement.classList.add('js');(function(){if(!matchMedia('(pointer:coarse)').matches)return;var w=innerWidth,hh=innerHeight;addEventListener('resize',function(e){var nw=innerWidth,nh=innerHeight;if(nw===w&&Math.abs(nh-hh)<220){e.stopImmediatePropagation();return;}w=nw;hh=nh;},true);})();window.__heroCX=document.documentElement.clientWidth*(innerWidth<=860?.5:(innerHeight>innerWidth*1.1?.57:.655));</script>
 </head>
@@ -3611,6 +3612,13 @@ var FINE = matchMedia('(pointer:fine)').matches;
 function layoutFor(w, h){
   var mob = innerWidth <= 860;
   if (!mob && h > w * 1.1) return { cx: w * .57, cy: h * .76, R: w * .46, pr: w * .07, phi: .28, tall: true };
+  if (mob) {
+    /* the planet sits below the call to action, never under it: clear the button by its own radius plus a margin */
+    var cy = h * .69, m = document.querySelector('.hero .mol'), y = 0, el = m;
+    while (el && el !== hero) { y += el.offsetTop; el = el.offsetParent; }
+    if (m && el === hero) cy = Math.min(Math.max(cy, y + m.offsetHeight + w * .095 + 64), h - 140);
+    return { cx: w * .5, cy: cy, R: w * .64, pr: w * .095, phi: .24 };
+  }
   return mob ? { cx: w * .5, cy: h * .69, R: w * .64, pr: w * .095, phi: .24 }
              : { cx: w * .655, cy: h * .5, R: Math.min(w * .4, h * .86), pr: Math.min(w * .062, h * .1), phi: .3 };
 }
