@@ -13,15 +13,15 @@
 <meta property="og:site_name" content="Emmanuel Atawodi">
 <meta property="og:title" content="Emmanuel Atawodi — Building systems that survive contact with reality">
 <meta property="og:description" content="I design and build technical, social, economic, and interactive systems at the intersection of incentives, trust, and interaction.">
-<meta property="og:url" content="https://emmanuelatawodi.com/">
-<meta property="og:image" content="https://emmanuelatawodi.com/og.png">
+<meta property="og:url" content="https://atawodi.vercel.app/">
+<meta property="og:image" content="https://atawodi.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Emmanuel Atawodi. Building systems that survive contact with reality. A ringed planet on a dark sky.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Emmanuel Atawodi — Building systems that survive contact with reality">
 <meta name="twitter:description" content="I design and build technical, social, economic, and interactive systems at the intersection of incentives, trust, and interaction.">
-<meta name="twitter:image" content="https://emmanuelatawodi.com/og.png">
+<meta name="twitter:image" content="https://atawodi.vercel.app/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -496,6 +496,9 @@ li.open .sy-more{grid-template-rows:1fr}
 /* r20: the readout's name has the full width now that the position mark is gone */
 .ro-name{padding-right:0}
 
+/* r40: on phones a fixed-size glow covers the whole section and reads as a grey band; keep the ground black */
+@media(max-width:860px){ .atlas{background:#080808} }
+
 /* ============ 03 · DOCTRINE (r20): the laws this work obeys ============ */
 .doctrine{position:relative;padding:clamp(100px,15vh,170px) 0 clamp(80px,11vh,130px);
   background:radial-gradient(900px 640px at 24% 48%, rgba(201,184,150,.04), rgba(201,184,150,0) 70%)}
@@ -557,6 +560,9 @@ li.open .sy-more{grid-template-rows:1fr}
 .qsky-wrap{position:absolute;inset:0;pointer-events:none;z-index:0}
 .qsky{position:sticky;top:0;display:block;width:100%;height:100vh}
 .doctrine > .chap,.notes > .chap{position:relative;z-index:1}
+
+/* r40: on phones a fixed-size glow covers the whole section and reads as a grey band; keep the ground black */
+@media(max-width:860px){ .doctrine{background:#080808} }
 
 /* ============ HUD ============ */
 .hud{position:fixed;left:0;right:0;top:0;z-index:30;height:56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
@@ -724,8 +730,8 @@ li.open .sy-more{grid-template-rows:1fr}
 
 /* ============ 05 → 06 · ABOUT → CONTACT (r32): one body of light, five forms ============ */
 .abx{position:relative;padding-top:clamp(30px,6vh,70px)}
-.abx-run{position:relative;height:790vh;--span:690vh}
-.abx-mark{position:absolute;left:0;top:calc(var(--span) * .7306);width:1px;height:1px;pointer-events:none}
+.abx-run{position:relative;height:827vh;--span:727vh}
+.abx-mark{position:absolute;left:0;top:calc(var(--span) * .7441);width:1px;height:1px;pointer-events:none}
 .abx-pin{position:sticky;top:0;height:100vh;overflow:hidden}
 .abx-cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
 .ab-img{position:absolute;left:0;top:0;width:10px;height:auto;opacity:0;pointer-events:none;z-index:0}
@@ -813,7 +819,7 @@ html.js .b0t{opacity:1}
 }
 @media(max-width:860px){
   .abx{padding-top:20px}
-  .abx-run{height:768svh;--span:668svh}
+  .abx-run{height:803svh;--span:703svh}
   .abx-pin{height:100svh}
   .abx-txt{--px:24px}
   .bt,.b0,.b1,.b2,.b3,.b4{left:24px;right:24px;width:auto;top:calc(54px + 52svh);bottom:auto;margin-top:0}
@@ -1025,8 +1031,11 @@ html:not(.nohfx) .hero .bg{opacity:0!important}
   .roles{line-height:1.4}
 }
 
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation}
+@media(max-width:860px){html{overflow-x:hidden}}
+html.mlock{overflow:hidden}
 </style>
-<script>document.documentElement.classList.add('js');window.__heroCX=document.documentElement.clientWidth*(innerWidth<=860?.5:(innerHeight>innerWidth*1.1?.57:.655));</script>
+<script>document.documentElement.classList.add('js');(function(){if(!matchMedia('(pointer:coarse)').matches)return;var w=innerWidth,hh=innerHeight;addEventListener('resize',function(e){var nw=innerWidth,nh=innerHeight;if(nw===w&&Math.abs(nh-hh)<220){e.stopImmediatePropagation();return;}w=nw;hh=nh;},true);})();window.__heroCX=document.documentElement.clientWidth*(innerWidth<=860?.5:(innerHeight>innerWidth*1.1?.57:.655));</script>
 </head>
 <body>
 <canvas id="hfx" aria-hidden="true"></canvas>
@@ -1603,11 +1612,11 @@ html:not(.nohfx) .hero .bg{opacity:0!important}
       var w=where(); A.forEach(function(a){ a.classList.toggle('on',a===w.a); });
       mk.classList.remove('go'); mk.style.transition='none'; mk.style.setProperty('--y','0px'); void mk.offsetWidth; mk.style.transition='';
       drawSky(); last=document.activeElement;
-      m.removeAttribute('inert'); m.classList.add('open'); m.setAttribute('aria-hidden','false'); document.body.classList.add('mlock');
+      m.removeAttribute('inert'); m.classList.add('open'); m.setAttribute('aria-hidden','false'); document.body.classList.add('mlock'); document.documentElement.classList.add('mlock');
       requestAnimationFrame(function(){ requestAnimationFrame(function(){ mk.style.setProperty('--y',w.y.toFixed(1)+'px'); }); });
       setTimeout(function(){ try{ c.focus({preventScroll:true}); }catch(e){} },60);
     } else {
-      m.classList.remove('open'); m.setAttribute('aria-hidden','true'); m.setAttribute('inert',''); document.body.classList.remove('mlock');
+      m.classList.remove('open'); m.setAttribute('aria-hidden','true'); m.setAttribute('inert',''); document.body.classList.remove('mlock'); document.documentElement.classList.remove('mlock');
       if(last&&last.focus){ try{ last.focus({preventScroll:true}); }catch(e){} } last=null;
     }
   }
@@ -2996,7 +3005,7 @@ html:not(.nohfx) .hero .bg{opacity:0!important}
   function span(){ return Math.max(1, run.offsetHeight - pin.offsetHeight); }
   /* scroll is not spent evenly: the first two crossings (about -> based in -> work) get more of it.
      WARP holds [start, end, weight] in progress units; the run is lengthened by the same amount in CSS. */
-  var WARP = [[.05, .14, 1.8], [.198, .29, 1.45]], WTOT = 1;
+  var WARP = [[.05, .14, 2.3], [.198, .29, 1.6]], WTOT = 1;
   WARP.forEach(function(k){ WTOT += (k[1] - k[0]) * (k[2] - 1); });
   function toP(u){ var d = u * WTOT, at = 0;
     for (var i = 0; i < WARP.length; i++) { var k = WARP[i], pre = k[0] - at;
@@ -3008,9 +3017,12 @@ html:not(.nohfx) .hero .bg{opacity:0!important}
       if (P <= k[0]) return (u + P - at) / WTOT; u += k[0] - at; at = k[0];
       if (P <= k[1]) return (u + (P - at) * k[2]) / WTOT; u += (k[1] - at) * k[2]; at = k[1]; }
     return (u + P - at) / WTOT; }
-  function measure(){
-    var r = run.getBoundingClientRect();
-    P = toP(clamp(-r.top / span(), 0, 1));
+  /* the scene follows the scroll with a short glide, so a fast flick still plays the change instead of cutting it */
+  var PF = -1;
+  function measure(dt){
+    var r = run.getBoundingClientRect(), Pt = toP(clamp(-r.top / span(), 0, 1));
+    if (REDUCE || !dt || PF < 0 || Math.abs(Pt - P) > .2) P = Pt; else P += (Pt - P) * (1 - Math.exp(-dt / .3));
+    if (Math.abs(Pt - P) < 1e-4) P = Pt; PF = 1;
     PRE = REDUCE ? (r.top < innerHeight ? 1 : 0) : ss(innerHeight * .92, innerHeight * .04, r.top);
     STAGE = 0;
     for (var i = 0; i < TR.length; i++) STAGE += REDUCE ? (P > (TR[i][0] + TR[i][1]) / 2 ? 1 : 0) : ss(TR[i][0], TR[i][1], P);
@@ -3439,9 +3451,9 @@ html:not(.nohfx) .hero .bg{opacity:0!important}
   function frame(now){
     if (!running) return;
     requestAnimationFrame(frame);
-    var dt = Math.min(.05, (now - (last || now)) / 1000); last = now;
+    var dtr = (now - (last || now)) / 1000, dt = Math.min(.05, dtr); last = now;
     var t = REDUCE ? 0 : (now - t0) / 1000;
-    measure();
+    measure(Math.min(.12, dtr));
     /* the words */
     var best = 0, bo = 0;
     BT.forEach(function(el, i){

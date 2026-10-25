@@ -12,5 +12,5 @@ Static site. Upload this folder as-is to any static host. Vercel, Netlify and Gi
 Vercel and Netlify serve `404.html` automatically for missing pages.
 
 ## Before going live
-- **Domain:** the link-preview tags in `index.html` point to `https://emmanuelatawodi.com`. If the site lives elsewhere, find and replace that address so previews on WhatsApp, LinkedIn and X load the image.
+- **Domain:** the link-preview tags in `index.html` point to `https://atawodi.vercel.app`. When a custom domain is added, find and replace that address so previews on WhatsApp, LinkedIn and X load the image.
 - **Links:** the email (`hello@emmanuelatawodi.com`) and the GitHub, LinkedIn and X links are still placeholders.
